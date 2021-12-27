@@ -4,6 +4,7 @@ const { Client, Intents } = require('discord.js');
 require('dotenv').config();
 const decode = require('./commands.js')
 
+
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 console.log(Date());
@@ -23,11 +24,11 @@ client.on('interactionCreate', async interaction => {
   }
 });
 
-client.on('message', (msg) => {
+client.on('messageCreate', (msg) => {
   //if (msg.content === 'Hello') msg.reply('Hi');
   let m = decode(msg.content);
   if (m != null && !(msg.author.bot)) msg.reply(m);
 });
 
 
-client.login('OTIyNzY1MDY1ODI2OTkyMTU5.YcGN7w.DVt2KpAgtXGYgZbGN0igbVmMkfs');
+client.login('OTIyNzY1MDY1ODI2OTkyMTU5.YcGN7w.MNMz0V6H-Kvq7kXCaOzKmjRCT-0');

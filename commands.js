@@ -1,19 +1,28 @@
+
 function decode(str) {
   str = str.toLowerCase();
   if (str[0] == '.') {
     if (str.indexOf('.introduce') == 0) {
       return "hi I am OG Bot I currently don't really have a purpose"
-    }
+    } else
 
-    if (str.indexOf('.date') == 0) {
-      return Date();
+      if (str.indexOf('.date') == 0) {
+        return Date();
 
-    }
-    if (str.indexOf('.calc' == 0)) {
-      try { return (String)(eval(str.substring(5))); } catch (err) {
-        return 'Error: Invalid calculation';
-      }
-    }
+      } else
+
+        if (str.indexOf('.time') == 0) {
+          return Date();
+        } else
+          if (str.indexOf('.calc') == 0) {
+            try { return (String)(eval(str.substring(5))); } catch (err) {
+              return 'Error: Invalid calculation';
+            }
+          } else
+
+            if (str.indexOf('.weather') == 0) {
+              return weatherBalloon(str.substring(9));
+            } else return 'Error: Invalid Command';
   }
 
   if (str.indexOf('hello bot') == 0 || str.indexOf('hi bot') == 0) {
@@ -48,7 +57,30 @@ function decode(str) {
     return 'Groovy Bot is retired';
   }
 
+  return 'YNWA';
+
 
 }
+
+function weatherBalloon(cityName) {
+  const fetch = require('node-fetch');
+  //var key = '519045439eea328bd3e655814f57bfdb';
+  cityName = cityName[0].toUpperCase() + cityName.substring(1);
+  var st = (fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=519045439eea328bd3e655814f57bfdb'))
+  st = st.json();
+  if (st.main.temp != null) return st.main.temp; else return 'no output';
+  //fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=519045439eea328bd3e655814f57bfdb')
+  //.then(function (resp) { return resp.json() }) // Convert data to json
+  //.then(function (data) {
+
+  //return 'test' + data.main.temp;
+
+  //})
+  //.catch(function () {
+  //return 'Invalid Input'
+  //});
+}
+
+
 
 module.exports = decode
