@@ -64,12 +64,12 @@ function decode(str) {
 
 function weatherBalloon(cityName) {
   const fetch = require('node-fetch');
-  //var key = '519045439eea328bd3e655814f57bfdb';
+  //var key = 'hidden';
   cityName = cityName[0].toUpperCase() + cityName.substring(1);
-  var st = (fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=519045439eea328bd3e655814f57bfdb'))
+  var st = (fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=hidden'))
   st = st.json();
   if (st.main.temp != null) return st.main.temp; else return 'no output';
-  //fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=519045439eea328bd3e655814f57bfdb')
+  //fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=hidden')
   //.then(function (resp) { return resp.json() }) // Convert data to json
   //.then(function (data) {
 
