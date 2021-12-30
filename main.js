@@ -24,11 +24,11 @@ client.on('interactionCreate', async interaction => {
   }
 });
 
-client.on('messageCreate', (msg) => {
+client.on('messageCreate', async (msg) => {
   //if (msg.content === 'Hello') msg.reply('Hi');
-  let m = decode(msg.content);
+  let m = await decode(msg.content, msg);
   if (m != null && !(msg.author.bot)) msg.reply(m);
 });
 
 
-client.login('OTIyNzY1MDY1ODI2OTkyMTU5.YcGN7w.MNMz0V6H-Kvq7kXCaOzKmjRCT-0');
+client.login('private');

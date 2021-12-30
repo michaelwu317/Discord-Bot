@@ -1,5 +1,6 @@
+const { message } = require('prompt');
 
-function decode(str) {
+async function decode(str, msg) {
   str = str.toLowerCase();
   if (str[0] == '.') {
     if (str.indexOf('.introduce') == 0) {
@@ -21,7 +22,9 @@ function decode(str) {
           } else
 
             if (str.indexOf('.weather') == 0) {
-              return weatherBalloon(str.substring(9));
+              var x = await weather(str.substring(9));
+              return x
+
             } else return 'Error: Invalid Command';
   }
 
@@ -57,28 +60,32 @@ function decode(str) {
     return 'Groovy Bot is retired';
   }
 
-  return 'YNWA';
+  //return 'YNWA';
 
 
 }
 
-function weatherBalloon(cityName) {
+async function weather(cityName) {
   const fetch = require('node-fetch');
-  //var key = 'hidden';
+
   cityName = cityName[0].toUpperCase() + cityName.substring(1);
-  var st = (fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=hidden'))
-  st = st.json();
-  if (st.main.temp != null) return st.main.temp; else return 'no output';
-  //fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=hidden')
-  //.then(function (resp) { return resp.json() }) // Convert data to json
-  //.then(function (data) {
+  var strw;
 
-  //return 'test' + data.main.temp;
 
-  //})
-  //.catch(function () {
-  //return 'Invalid Input'
-  //});
+  await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=private')
+    .then(function (resp) { return resp.json() }) // Convert data to json
+    .then(function (data) {
+
+      console.log(data.main.temp);
+      strw = JSON.stringify(data.main.temp);
+      //msg.reply(JSON.stringify(data.main.temp));
+
+    })
+
+    .catch(function () {
+      return 'Invalid Input'
+    });
+  return 'The current temperature at ' + cityName + ' is ' + (parseInt(strw) - 273.15).toFixed(2) + ' Celcius';
 }
 
 
